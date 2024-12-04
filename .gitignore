@@ -24,8 +24,6 @@ dist-ssr
 *.sw?
 .env
 
-constants
-- constant.js
 
 node_modules
 .git
