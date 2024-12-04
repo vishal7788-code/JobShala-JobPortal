@@ -1,73 +1,52 @@
-import React from 'react';
-import { Button } from './ui/button';
-import { Bookmark } from 'lucide-react';
-import { Avatar, AvatarImage } from './ui/avatar';
-import { Badge } from './ui/badge';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import Navbar from './shared/Navbar';
+import Job from './Job';
+import FilterCard from './FilterCard';
+import { Filter } from 'lucide-react'; // Importing the filter icon
+import { useSelector } from 'react-redux';
 
-const Job = ({job}) => {
-    const navigate = useNavigate();
- const daysAgo = (mongodbTime) => {
-    const createdAt = new Date (mongodbTime);
-    const today = new Date();
-    const diffTime= today - createdAt;
-    return Math.floor(diffTime/(1000*24*60*60))
- }
+const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
-;    
-const navigateToJobDetails=()=>{
-navigate(`/Jobs/Description/${job?._id}`)
-    }
+const Jobs = () => {
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const {allJobs} = useSelector(store => store.job)
+
     return (
-        <div className="shadow-xl p-4 md:p-5 rounded-lg bg-white relative ">
-            <div className="flex items-center justify-between">
-                <p className="text-xs text-gray-500"> {daysAgo(job?.createdAt)=== 0 ? "Today":`${daysAgo(job?.createdAt)}`}</p>
-                <Button variant="outline" className="rounded-full" size="icon">
-                    <Bookmark />
-                </Button>
-            </div>
+        <div className=" overflow-hidden h-[90vh] relative ">
+            <Navbar />
+            <div className="h-[calc(100vh-4rem)] flex lg:mt-20 md:mt-20">
+                <div className="fixed bottom-4 right-4 z-40 md:hidden">
+                    <button
+                        className="bg-purple-700 text-white p-4 rounded-full shadow-md flex items-center justify-center relative left-3 top-3" 
+                        size="icon"
+                        onClick={() => setIsFilterOpen(true)}
+                    >
+                        <Filter size={10} />
+                    </button>
+                </div>
 
-            <div className="flex items-center gap-3 my-2">
-                <Button variant="outline" className="rounded-full" size="icon">
-                    <Avatar>
-                        <AvatarImage src="https://shorturl.at/GDPiJ" />
-                    </Avatar>
-                </Button>
-                <div>
-                    <h1  className="text-lg sm:text-md font-bold">{job?.company?.name}</h1>
-                    <p className="text-xs text-gray-500">{job?.location}</p>
+                <div className="hidden md:block md:w-[25%] w-[20%] mx-5">
+                    <FilterCard isMobile={false} />
+                </div>
+
+                <div className="flex-1 overflow-y-auto  h-[calc(100vh-10rem)] scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200">
+                    {allJobs.length <= 0 ? (
+                        <span>No Jobs</span>
+                    ) : (
+                        <div className="grid grid-cols-1 gap-5 lg:ml-10 md:w-[90%] lg:w-[80%] w-[100%] p-5 lg:p-10 ">
+                            {allJobs.map((job) => (
+                                <div key={job?._id}>
+                                    <Job job={job} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 
-            <div className="p-2">
-                <h1 className="text-sm sm:text-md font-semibold mx-4">{job?.title}</h1>
-                <p className="text-xs sm:text-sm mx-4 mt-2 text-gray-700">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis animi laborum placeat magnam corporis ullam
-                    consequuntur atque eligendi amet blanditiis.
-                </p>
-            </div>
-            <div className='flex gap-2 text-sm font-semibold mx-6 mb-3'>
-    <h1>Role:</h1>
-    <span>{job?.role}</span>
-</div>
-            <div className="mx-6 my-3">
-                <h1 className="text-md font-semibold text-gray-500">Key Highlights</h1>
-            </div>
-
-
-            <div className="flex gap-3 mx-4 mt-3 flex-wrap">
-                <Badge variant="outline" className="text-blue-600 text-xs sm:text-sm">{job?.jobType}</Badge>
-                <Badge variant="outline" className="text-red-600 text-xs sm:text-sm">{job?.position} Positions</Badge>
-                <Badge variant="outline" className="text-green-600 text-xs sm:text-sm">{job?.role}</Badge>
-                <Badge variant="outline" className="text-orange-600 text-xs sm:text-sm">{job?.salary} Lpa</Badge>
-            </div>
-
-            <div className="flex  sm:flex-row justify-end items-center gap-3 mt-3">
-                <Button onClick={navigateToJobDetails} className="bg-purple-700 hover:bg-purple-800 text-xs sm:text-sm">View Details</Button>
-            </div>
+            <FilterCard isMobile={true} isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
         </div>
     );
 };
 
-
-export default Job;
+export default Jobs;
