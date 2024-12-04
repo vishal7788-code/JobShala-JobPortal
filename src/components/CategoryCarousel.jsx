@@ -16,7 +16,7 @@ const CategoryCarousel = () => {
     ];
 
     return (
-        <div className='w-full md:w-[30vw] relative top-[-1.5rem] md:top-[8rem] md:left-[3.5rem] xl:top-[-5rem] lg:top-[3rem] 2xl:top-[-8rem] right-2' >
+        <div className='w-full md:w-[30vw] relative top-[-2rem] md:top-[8rem] md:left-[3.5rem] xl:top-[-5rem] lg:top-[3rem] 2xl:top-[-8rem] right-2' >
             <Carousel className='text-center font-semibold'>
                 <CarouselContent className='w-full md:w-[30vw] mx-auto'>
                     {category.map((cat, index) => (
