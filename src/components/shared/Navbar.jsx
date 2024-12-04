@@ -112,8 +112,8 @@ const Navbar = () => {
                     <ul className='flex flex-col gap-2 font-medium justify-center items-center'>
 
                         <Link to="/"> <li className='hover:text-purple-700 ease-in-out duration-300'>Home</li></Link>
-                        <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li>
-                        <li className='hover:text-purple-700 ease-in-out duration-300'>Browse</li>
+                        <Link to="/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
+                        <Link to="/Browse"> <li className='hover:text-purple-700 ease-in-out duration-300'>Browse</li></Link>
                     </ul>
                     {
                         !user ? (

@@ -58,8 +58,8 @@ navigate(`/Jobs/Description/${job?._id}`)
             <div className="flex gap-3 mx-4 mt-3 flex-wrap">
                 <Badge variant="outline" className="text-blue-600 text-xs sm:text-sm">{job?.jobType}</Badge>
                 <Badge variant="outline" className="text-red-600 text-xs sm:text-sm">{job?.position} Positions</Badge>
-                <Badge variant="outline" className="text-green-600 text-xs sm:text-sm">{job.role}</Badge>
-                <Badge variant="outline" className="text-orange-600 text-xs sm:text-sm">{job.salary} Lpa</Badge>
+                <Badge variant="outline" className="text-green-600 text-xs sm:text-sm">{job?.role}</Badge>
+                <Badge variant="outline" className="text-orange-600 text-xs sm:text-sm">{job?.salary} Lpa</Badge>
             </div>
 
             <div className="flex  sm:flex-row justify-end items-center gap-3 mt-3">
