@@ -9,8 +9,6 @@ import { useSelector } from 'react-redux';
 const Jobs = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const { allJobs } = useSelector(store => store.job);
-
-    // Safe check if allJobs is an array
     const jobs = Array.isArray(allJobs) ? allJobs : [];
 
     return (
@@ -33,7 +31,7 @@ const Jobs = () => {
 
                 <div className="flex-1 overflow-y-auto h-[calc(100vh-10rem)] scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200">
                     {jobs.length <= 0 ? (
-                        <span>No Jobs</span>
+                         <span className='flex items-center justify-center my-auto text-lg font-semibold text-gray-500'>Login to see available jobs.</span>
                     ) : (
                         <div className="grid grid-cols-1 gap-5 lg:ml-10 md:w-[90%] lg:w-[80%] w-[100%] p-5 lg:p-10 ">
                             {jobs.map((job) => (

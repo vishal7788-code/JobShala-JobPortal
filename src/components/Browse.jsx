@@ -3,10 +3,14 @@ import Navbar from './shared/Navbar'
 import { Button } from './ui/button'
 import { Search } from 'lucide-react'
 import Job from './Job'
+import { useSelector } from 'react-redux'
 
-const jobs = [1, 2, 3, 4, 5, 6, 7]
 
-const Browse = () => {
+
+const Browse = ({job}) => {
+  const { allJobs } = useSelector(store => store.job);
+  
+  const jobs = Array.isArray(allJobs) ? allJobs : [];
   return (
     <div className="flex flex-col h-screen ">
       <Navbar />
@@ -24,9 +28,9 @@ const Browse = () => {
       </div>
       <hr className='mx-auto my-2 w-[85vw]' />
       <div className="flex-1 overflow-y-auto px-5 mx-auto scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200">
-        {jobs.map((job, index) => (
-          <div key={index} className="mb-8">
-            <Job />
+        {jobs.map((job) => (
+          <div key={job._id} className="mb-8">
+            <Job job={job} />
           </div>
         ))}
       </div>

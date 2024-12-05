@@ -16,7 +16,7 @@ useGetAllJobs()
         Latest Job <span className="text-purple-700">Openings</span>
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-        {jobs.length === 0 ? <span>No Jobs Available</span> : jobs.slice(0, 6).map((job) => (
+        {jobs.length === 0 ? <span className='text-center text-lg font-semibold text-gray-500'>Login to see available jobs.</span> : jobs.slice(0, 6).map((job) => (
           <JobCards key={job?._id} job={job} />
         ))}
       </div>
