@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import Navbar from './shared/Navbar';
 import Job from './Job';
 import FilterCard from './FilterCard';
-import { Filter } from 'lucide-react'; // Importing the filter icon
+import { Filter } from 'lucide-react'; 
 import { useSelector } from 'react-redux';
-
-const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+ 
 
 const Jobs = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const {allJobs} = useSelector(store => store.job)
+    const { allJobs } = useSelector(store => store.job);
+
+    // Safe check if allJobs is an array
+    const jobs = Array.isArray(allJobs) ? allJobs : [];
 
     return (
-        <div className=" overflow-hidden h-[90vh] relative ">
+        <div className="overflow-hidden h-[90vh] relative">
             <Navbar />
             <div className="h-[calc(100vh-4rem)] flex lg:mt-20 md:mt-20">
                 <div className="fixed bottom-4 right-4 z-40 md:hidden">
@@ -29,12 +31,12 @@ const Jobs = () => {
                     <FilterCard isMobile={false} />
                 </div>
 
-                <div className="flex-1 overflow-y-auto  h-[calc(100vh-10rem)] scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200">
-                    {allJobs.length <= 0 ? (
+                <div className="flex-1 overflow-y-auto h-[calc(100vh-10rem)] scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200">
+                    {jobs.length <= 0 ? (
                         <span>No Jobs</span>
                     ) : (
                         <div className="grid grid-cols-1 gap-5 lg:ml-10 md:w-[90%] lg:w-[80%] w-[100%] p-5 lg:p-10 ">
-                            {allJobs.map((job) => (
+                            {jobs.map((job) => (
                                 <div key={job?._id}>
                                     <Job job={job} />
                                 </div>
@@ -48,5 +50,6 @@ const Jobs = () => {
         </div>
     );
 };
+
 
 export default Jobs;

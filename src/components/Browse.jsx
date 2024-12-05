@@ -11,7 +11,7 @@ const Browse = () => {
     <div className="flex flex-col h-screen ">
       <Navbar />
       <div>
-        <div className="flex flex-col items-center justify-center md:flex-row md:gap-3 lg:mt-20 md:mt-20">
+        <div className="flex flex-col items-center justify-center mt-20 md:flex-row md:gap-3 lg:mt-20 md:mt-20">
           <input
             className="border-2 w-[80vw] md:w-[35vw] h-[7vh] outline-none border-gray-400 px-4 font-medium rounded-3xl my-5 md:shadow-xl"
             placeholder="Your next opportunity"

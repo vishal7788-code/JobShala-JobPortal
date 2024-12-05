@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { USER_API_END_POINT } from '@/constants/constant';
 import { setUser } from '@/redux/authSlice';
+import {  setAllJobs } from '@/redux/jobSlice';
 import { toast } from 'sonner';
 
 const Navbar = () => {
@@ -23,6 +24,7 @@ const Navbar = () => {
             const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true })
             if (res.data.success) {
                 dispatch(setUser(null))
+                dispatch(setAllJobs([]))
                 navigate("/")
                 toast.success(res.data.message, { duration: 1000 })
             }

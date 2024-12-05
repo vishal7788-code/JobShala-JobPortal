@@ -5,11 +5,10 @@ import CategoryCarousel from './CategoryCarousel'
 import QuickSteps from './QuickSteps'
 import LatestJob from './LatestJob'
 import Footer from './Footer'
-import useGetAllJobs from '@/hooks/useGetAllJobs'
 
 const Home = () => {
 
-  useGetAllJobs()
+  
   return (
     <div className='h-screen overflow-auto scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200'>
       <Navbar />

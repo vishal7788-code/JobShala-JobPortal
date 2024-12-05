@@ -5,23 +5,23 @@ import { Avatar, AvatarImage } from './ui/avatar';
 import { Badge } from './ui/badge';
 import { useNavigate } from 'react-router-dom';
 
-const Job = ({job}) => {
+const Job = ({ job }) => {
     const navigate = useNavigate();
- const daysAgo = (mongodbTime) => {
-    const createdAt = new Date (mongodbTime);
-    const today = new Date();
-    const diffTime= today - createdAt;
-    return Math.floor(diffTime/(1000*24*60*60))
- }
+    const daysAgo = (mongodbTime) => {
+        const createdAt = new Date(mongodbTime);
+        const today = new Date();
+        const diffTime = today - createdAt;
+        return Math.floor(diffTime / (1000 * 24 * 60 * 60))
+    }
 
-;    
-const navigateToJobDetails=()=>{
-navigate(`/Jobs/Description/${job?._id}`)
+        ;
+    const navigateToJobDetails = () => {
+        navigate(`/Jobs/Description/${job?._id}`)
     }
     return (
         <div className="shadow-xl p-4 md:p-5 rounded-lg bg-white relative ">
             <div className="flex items-center justify-between">
-                <p className="text-xs text-gray-500"> {daysAgo(job?.createdAt)=== 0 ? "Today":`${daysAgo(job?.createdAt)}`}</p>
+                <p className="text-xs text-gray-500"> {daysAgo(job?.createdAt) === 0 ? "Today" : `${daysAgo(job?.createdAt)}`} day ago</p>
                 <Button variant="outline" className="rounded-full" size="icon">
                     <Bookmark />
                 </Button>
@@ -34,7 +34,7 @@ navigate(`/Jobs/Description/${job?._id}`)
                     </Avatar>
                 </Button>
                 <div>
-                    <h1  className="text-lg sm:text-md font-bold">{job?.company?.name}</h1>
+                    <h1 className="text-lg sm:text-md font-bold">{job?.company?.name}</h1>
                     <p className="text-xs text-gray-500">{job?.location}</p>
                 </div>
             </div>
@@ -47,9 +47,9 @@ navigate(`/Jobs/Description/${job?._id}`)
                 </p>
             </div>
             <div className='flex gap-2 text-sm font-semibold mx-6 mb-3'>
-    <h1>Role:</h1>
-    <span>{job?.role}</span>
-</div>
+                <h1>Role:</h1>
+                <span>{job?.role}</span>
+            </div>
             <div className="mx-6 my-3">
                 <h1 className="text-md font-semibold text-gray-500">Key Highlights</h1>
             </div>
