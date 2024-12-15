@@ -6,8 +6,7 @@ import useGetAllJobs from '@/hooks/useGetAllJobs';
 
 const LatestJob = () => {
   const { allJobs } = useSelector(store => store.job);
-  useGetAllJobs()
-  // Check if allJobs is valid and not null
+  useGetAllJobs();
   const jobs = allJobs && Array.isArray(allJobs) ? allJobs : [];
 
   return (
