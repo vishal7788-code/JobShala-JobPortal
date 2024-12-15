@@ -1,12 +1,12 @@
 import React from 'react';
-import JobCards from './JobCards'; 
+import JobCards from './JobCards';
 import { useSelector } from 'react-redux';
 import useGetAllJobs from '@/hooks/useGetAllJobs';
 
 
 const LatestJob = () => {
   const { allJobs } = useSelector(store => store.job);
-useGetAllJobs()
+  useGetAllJobs()
   // Check if allJobs is valid and not null
   const jobs = allJobs && Array.isArray(allJobs) ? allJobs : [];
 
