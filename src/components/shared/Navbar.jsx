@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { USER_API_END_POINT } from '@/constants/constant';
 import { setUser } from '@/redux/authSlice';
-import {  setAllJobs } from '@/redux/jobSlice';
+import { setAllJobs } from '@/redux/jobSlice';
 import { toast } from 'sonner';
 
 const Navbar = () => {
@@ -41,9 +41,21 @@ const Navbar = () => {
                 </div>
                 <div className='hidden md:flex items-center gap-5'>
                     <ul className='flex font-medium items-center gap-5'>
-                        <Link to="/"> <li className='hover:text-purple-700 ease-in-out duration-300'>Home</li></Link>
-                        <Link to="/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
-                        <Link to="/Browse"> <li className='hover:text-purple-700 ease-in-out duration-300'>Browse</li></Link>
+                        {
+                            user && user.role === "recruiter" ? (
+                                <>
+                                    <Link to="/Admin/Companies"> <li className='hover:text-purple-700 ease-in-out duration-300'>Companies</li></Link>
+                                    <Link to="/Admin/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/"> <li className='hover:text-purple-700 ease-in-out duration-300'>Home</li></Link>
+                                    <Link to="/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
+                                    <Link to="/Browse"> <li className='hover:text-purple-700 ease-in-out duration-300'>Browse</li></Link>
+                                </>
+                            )
+                        }
+
                     </ul>
                     {
                         !user ? (
@@ -73,14 +85,28 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col gap-2 my-2'>
-                                        <div className='flex'>
-                                            <User2 className='mt-2' />
-                                            <Button variant="link"> <Link to='/Profile'>View Profile</Link></Button>
-                                        </div>
-                                        <div className='flex items-center'>
-                                            <LogOut />
-                                            <Button variant="link" onClick={logoutHandler}>Logout</Button>
-                                        </div>
+
+                                        {
+                                            user && user.role === "recruiter" ? (
+                                                <>
+                                                    <div className='flex items-center'>
+                                                        <LogOut />
+                                                        <Button variant="link" onClick={logoutHandler}>Logout</Button>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <div className='flex'>
+                                                        <User2 className='mt-2' />
+                                                        <Button variant="link"> <Link to='/Profile'>View Profile</Link></Button>
+                                                    </div>
+                                                    <div className='flex items-center'>
+                                                        <LogOut />
+                                                        <Button variant="link" onClick={logoutHandler}>Logout</Button>
+                                                    </div></>
+                                            )
+                                        }
+
                                     </div>
                                 </PopoverContent>
                             </Popover>
@@ -113,9 +139,21 @@ const Navbar = () => {
                 <div className='md:hidden px-4 py-2 '>
                     <ul className='flex flex-col gap-2 font-medium justify-center items-center'>
 
-                        <Link to="/"> <li className='hover:text-purple-700 ease-in-out duration-300'>Home</li></Link>
-                        <Link to="/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
-                        <Link to="/Browse"> <li className='hover:text-purple-700 ease-in-out duration-300'>Browse</li></Link>
+                        {
+                            user && user.role === "recruiter" ? (
+                                <>
+                                    <Link to="/Admin/Companies"> <li className='hover:text-purple-700 ease-in-out duration-300'>Companies</li></Link>
+                                    <Link to="/Admin/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/"> <li className='hover:text-purple-700 ease-in-out duration-300'>Home</li></Link>
+                                    <Link to="/Jobs"> <li className='hover:text-purple-700 ease-in-out duration-300'>Jobs</li></Link>
+                                    <Link to="/Browse"> <li className='hover:text-purple-700 ease-in-out duration-300'>Browse</li></Link>
+                                </>
+                            )
+                        }
+
                     </ul>
                     {
                         !user ? (
@@ -134,15 +172,36 @@ const Navbar = () => {
                                     <PopoverTrigger asChild>
                                         <div className='flex items-center gap-2 cursor-pointer'>
                                             <Avatar className='cursor-pointer'>
-                                                <AvatarImage src={user?.profile?.profilePhoto}/>
+                                                <AvatarImage src={user?.profile?.profilePhoto} />
                                             </Avatar>
                                             <span className='font-medium'>{user?.fullname}</span>
                                         </div>
                                     </PopoverTrigger>
                                     <PopoverContent className='w-full'>
                                         <div className='flex flex-col gap-2'>
-                                            <Button variant="link"><Link to='/Profile'>View Profile</Link></Button>
-                                            <Button variant="link" onClick={logoutHandler}>Logout</Button>
+
+                                            {
+                                                user && user.role === "recruiter" ? (
+                                                    <>
+                                                        <div className='flex items-center'>
+                                                            <LogOut />
+                                                            <Button variant="link" onClick={logoutHandler}>Logout</Button>
+                                                        </div>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <div className='flex'>
+                                                            <User2 className='mt-2' />
+                                                            <Button variant="link"> <Link to='/Profile'>View Profile</Link></Button>
+                                                        </div>
+                                                        <div className='flex items-center'>
+                                                            <LogOut />
+                                                            <Button variant="link" onClick={logoutHandler}>Logout</Button>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
+
                                         </div>
                                     </PopoverContent>
                                 </Popover>

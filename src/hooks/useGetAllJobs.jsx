@@ -10,7 +10,7 @@ const useGetAllJobs = () => {
     const { user } = useSelector(store => store.auth)
     useEffect(() => {
         if (!user) {
-            console.error('Error from get all jobs:')
+            console.error('Error from get all jobs')
             return;
         }
 
